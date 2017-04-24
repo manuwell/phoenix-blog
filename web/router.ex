@@ -22,6 +22,14 @@ defmodule Teacher.Router do
     end
   end
 
+  scope "/api", Teacher, as: :api do
+    pipe_through :api
+
+    scope "/v1", Api.V1, as: :v1 do
+      resources "/posts", PostController, only: [:index, :show]
+    end
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Teacher do
   #   pipe_through :api
